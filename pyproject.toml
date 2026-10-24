@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling>=1.25"]
+requires = ["hatchling>=1.32.4"]
 build-backend = "hatchling.build"
 
 [project]
@@ -23,17 +23,17 @@ classifiers = [
   "Topic :: Utilities",
 ]
 dependencies = [
-  "fastapi>=0.110",
-  "uvicorn[standard]>=0.29",
-  "httpx>=0.27",
-  "cryptography>=42",
+  "fastapi>=0.156.8",
+  "uvicorn[standard]>=0.54.0",
+  "httpx>=0.28.1",
+  "cryptography>=50.0.2",
 ]
 
 [project.optional-dependencies]
 dev = [
-  "pytest>=8",
-  "pytest-asyncio>=0.23",
-  "ruff>=0.5",
+  "pytest>=9.1.1",
+  "pytest-asyncio>=1.4.0",
+  "ruff>=0.17.1",
 ]
 
 [project.scripts]
