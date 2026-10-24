@@ -1,0 +1,38 @@
+services:
+  hexgate:
+    build:
+      context: .
+    image: hexgate:1.0.0
+    container_name: hexgate
+    restart: unless-stopped
+    ports:
+      # Published to loopback only. Change to "8787:8787" only behind a
+      # TLS reverse proxy or VPN, and set both auth tokens first.
+      - "127.0.0.1:8787:8787"
+    environment:
+      HEXGATE_HOME: /data
+      HEXGATE_HOST: 0.0.0.0
+      # Required inside the container: Docker NAT makes client addresses
+      # non-loopback even when the host publishes the port on 127.0.0.1.
+      HEXGATE_ALLOW_REMOTE: "true"
+      # Set these before exposing the service beyond this machine:
+      # HEXGATE_PROXY_TOKEN: "change-me"
+      # HEXGATE_ADMIN_TOKEN: "change-me-too"
+      # HEXGATE_MASTER_PASSWORD: "portable-vault-password"
+    volumes:
+      - hexgate-data:/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/healthz', timeout=4)",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  hexgate-data:

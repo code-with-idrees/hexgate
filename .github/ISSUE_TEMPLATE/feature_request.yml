@@ -1,0 +1,51 @@
+name: Feature request
+description: Suggest a provider, client, or behaviour
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the workflow, not just the feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: How should it work? Include config or API shape if relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Existing workarounds, other gateways, or why they are not enough.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Provider catalog
+        - Routing / failover
+        - Protocol translation
+        - Dashboard / admin API
+        - CLI / install
+        - Token optimizer
+        - Security
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This keeps the gateway local, small, and free of a build step.
+        - label: I have read the "What is not proxied" section of docs/compatibility.md.

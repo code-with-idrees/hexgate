@@ -1,0 +1,65 @@
+# Changelog
+
+All notable changes to Hexgate are documented here. The format follows
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] - 2026-10-24
+
+Initial public release.
+
+### Added
+
+- **One local endpoint, two protocols.** Anthropic Messages and OpenAI Chat
+  Completions, translated in both directions at the edge.
+- **Streaming translation.** Anthropic ↔ OpenAI SSE state machines covering
+  text, thinking, tool calls, usage and error frames, with a synthesised
+  `[DONE]` when an upstream closes without one.
+- **Provider catalog.** 41 providers as JSON data, all disabled by default;
+  adding a key enables the provider automatically.
+- **Routing.** Direct `provider/model` references, `sonnet`/`opus`/`haiku`/`fable`
+  tier chains, a default chain, and a zero-config implicit fallback. Strategies:
+  `quality`, `cheapest`, `fastest`, `round_robin`.
+- **Reliability.** Classified retries, per-route circuit breakers with a
+  half-open trial, per-key rotation and cooldowns, `Retry-After` support, and
+  bounded timeouts.
+- **Route planner.** `hexgate route` and the dashboard explain candidate order
+  and skip reasons before traffic is sent.
+- **Token optimizer.** Trailing-whitespace trimming, empty-turn removal,
+  duplicate system paragraph removal, and head/tail truncation of oversized tool
+  output, with per-rule savings.
+- **Encrypted vault.** AES-256-GCM, scrypt key derivation, machine-bound by
+  default, optional `HEXGATE_MASTER_PASSWORD`, atomic `0600` writes, masked API
+  responses.
+- **Dashboard.** Overview, Providers, Routing, Activity, Playground, Models and
+  Settings in three static files, with no build step.
+- **Admin API.** Provider and key management, connection tests, model discovery,
+  route plans, request records, stats, config patches and diagnostics under
+  `/api`.
+- **Observability.** Prometheus `/metrics`, bounded request telemetry, latency
+  and TTFT, token counts, conservative cost/savings estimates, and
+  `x-hexgate-*` response headers.
+- **CLI.** `serve`, `init`, `keys`, `providers`, `models`, `route`, `doctor`,
+  `config`, `env`, `launch` and `version`, with launchers for Claude Code,
+  OpenCode, Aider and custom binaries.
+- **Security defaults.** Loopback-only binding, separate proxy/admin tokens,
+  constant-time comparison, remote-access opt-in, CSP and hardening headers.
+- **Operations.** Dockerfile, Compose file, POSIX and PowerShell installers, CI
+  for Linux and Windows on Python 3.11–3.13, and offline tests with mocked
+  upstreams.
+- **Documentation.** Architecture, configuration, providers, compatibility,
+  troubleshooting, security policy and contribution guide.
+
+### Known limitations
+
+- The OpenAI Responses API (`/v1/responses`) is not proxied, so Codex CLI is not
+  supported.
+- Embeddings, batches, files, image generation and audio endpoints are out of
+  scope.
+- `count_tokens` is a ~4-characters-per-token estimate.
+- Anthropic prompt caching (`cache_control`) and thinking signatures are dropped
+  during translation.
+- Only one choice (`n = 1`) is represented.
+- Request telemetry and circuit state are in memory and reset on restart.
+
+[1.0.0]: https://github.com/code-with-idrees/hexgate/releases/tag/v1.0.0

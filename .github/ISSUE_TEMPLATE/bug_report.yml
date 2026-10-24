@@ -1,0 +1,75 @@
+name: Bug report
+description: Something does not work as documented
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do **not** include API keys, proxy tokens, `secrets.json`, or full prompts.
+        For security issues, use the private advisory link in SECURITY.md instead.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what did you see instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Minimal config, model name, client, and request shape (redacted).
+      placeholder: |
+        1. hexgate keys set groq
+        2. hexgate serve
+        3. curl ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Hexgate version
+      description: Output of `hexgate version`
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: OS and Python
+      placeholder: Windows 11, Python 3.13.13
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: hexgate doctor
+      description: Paste the output. It masks secrets; double-check before submitting.
+      render: text
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error and request id
+      description: Include the client error, `x-hexgate-request-id`, and the matching Activity row if available.
+      render: text
+
+  - type: dropdown
+    id: client
+    attributes:
+      label: Client
+      options:
+        - Claude Code
+        - OpenCode
+        - Aider
+        - Cline / Continue
+        - curl / SDK
+        - Dashboard
+        - Other
+    validations:
+      required: true

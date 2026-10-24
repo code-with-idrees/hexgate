@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Hexgate — one local endpoint, every model, zero wasted retries." />
+    <title>Hexgate · model gateway</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="Hexgate home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M16 2.5 27.7 9.2v13.6L16 29.5 4.3 22.8V9.2Z" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M16 9.2 21.8 12.5v6.9L16 22.8l-5.8-3.4v-6.9Z" fill="currentColor" opacity=".9" />
+          </svg>
+          <span class="brand-text">
+            <strong>HEXGATE</strong>
+            <small>model gateway</small>
+          </span>
+        </a>
+
+        <nav class="nav" id="nav">
+          <button class="nav-item is-active" data-view="overview">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h6v6H3zM11 3h6v4h-6zM11 9h6v8h-6zM3 11h6v6H3z"/></svg>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" data-view="providers">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 18 6.5v7L10 18l-8-4.5v-7z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.2"/></svg>
+            <span>Providers</span>
+          </button>
+          <button class="nav-item" data-view="routing">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 14h5l2-4h7M3 6h4l3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16" cy="10" r="2"/></svg>
+            <span>Routing</span>
+          </button>
+          <button class="nav-item" data-view="activity">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h4l2-6 4 12 2-6h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span>Activity</span>
+          </button>
+          <button class="nav-item" data-view="playground">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4 3 10l4 6M13 4l4 6-4 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Playground</span>
+          </button>
+          <button class="nav-item" data-view="settings">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.3 4.3l1.5 1.5M14.2 14.2l1.5 1.5M15.7 4.3l-1.5 1.5M5.8 14.2l-1.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="status-pill" id="side-status">
+            <span class="dot"></span>
+            <span id="side-status-text">connecting…</span>
+          </div>
+          <div class="side-meta">
+            <span id="version-label">v1.0.0</span>
+            <span class="sep">·</span>
+            <span>local-first</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="titles">
+            <h1 id="view-title">Overview</h1>
+            <p id="view-sub">A live view of every request that crosses the gateway.</p>
+          </div>
+          <div class="top-actions" id="top-actions"></div>
+        </header>
+
+        <div class="views" id="views">
+          <section class="view is-active" id="view-overview"></section>
+          <section class="view" id="view-providers"></section>
+          <section class="view" id="view-routing"></section>
+          <section class="view" id="view-activity"></section>
+          <section class="view" id="view-playground"></section>
+          <section class="view" id="view-settings"></section>
+        </div>
+      </main>
+    </div>
+
+    <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+    <aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog"></aside>
+    <div class="toasts" id="toasts"></div>
+
+    <script type="module" src="/assets/app.js"></script>
+  </body>
+</html>

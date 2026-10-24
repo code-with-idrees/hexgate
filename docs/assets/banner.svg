@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-label="Hexgate — one local endpoint for every model">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0c11"/>
+      <stop offset="0.55" stop-color="#08090c"/>
+      <stop offset="1" stop-color="#0b1110"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4ff73"/>
+      <stop offset="1" stop-color="#8fd41f"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b8ff3c" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#6aa7ff" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.18" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#b8ff3c" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#b8ff3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="0.05" r="0.6">
+      <stop offset="0" stop-color="#6aa7ff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#6aa7ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0v32" fill="none" stroke="#182031" stroke-width="1" stroke-opacity="0.55"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="340" fill="url(#bg)"/>
+  <rect width="1200" height="340" fill="url(#grid)"/>
+  <rect width="1200" height="340" fill="url(#glow)"/>
+  <rect width="1200" height="340" fill="url(#glow2)"/>
+
+  <!-- gate mark -->
+  <g transform="translate(84 92)">
+    <path d="M64 0 128 37v74L64 148 0 111V37Z" fill="#0d1310" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M64 20 110 47v54L64 128 18 101V47Z" fill="none" stroke="#b8ff3c" stroke-opacity="0.22" stroke-width="1.5"/>
+    <path d="M42 52v44M86 52v44M42 74h44" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="42" cy="52" r="4.5" fill="#d4ff73"/>
+    <circle cx="86" cy="96" r="4.5" fill="#6aa7ff"/>
+  </g>
+
+  <text x="252" y="168" fill="#eef2f8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="10">HEXGATE</text>
+  <text x="256" y="210" fill="#98a2b8" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="23" letter-spacing="0.4">One local endpoint. Every model. Zero wasted retries.</text>
+
+  <rect x="256" y="238" width="128" height="3" rx="1.5" fill="url(#fade)"/>
+  <text x="400" y="246" fill="#5b6478" font-family="ui-monospace, Consolas, monospace" font-size="15" letter-spacing="0.6">MIT · Python 3.11+ · OpenAI + Anthropic wire protocols</text>
+
+  <!-- route chain -->
+  <g transform="translate(84 268)" fill="none" stroke="#263042" stroke-width="1.5">
+    <path d="M0 0h1000"/>
+  </g>
+  <g font-family="ui-monospace, Consolas, monospace" font-size="12" fill="#6f7a90">
+    <circle cx="96" cy="268" r="3.5" fill="#b8ff3c"/>
+    <text x="110" y="272">request</text>
+    <circle cx="330" cy="268" r="3.5" fill="#6aa7ff"/>
+    <text x="344" y="272">sanitise · shape · plan</text>
+    <circle cx="680" cy="268" r="3.5" fill="#b18cff"/>
+    <text x="694" y="272">route · retry · rotate</text>
+    <circle cx="1000" cy="268" r="3.5" fill="#3ddc84"/>
+    <text x="1014" y="272">answer</text>
+  </g>
+</svg>
