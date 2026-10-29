@@ -4,6 +4,29 @@ All notable changes to Hexgate are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 1.1.0
+
+### Added
+
+- **Codex CLI support.** New `POST /v1/responses` endpoint speaks the OpenAI
+  Responses API wire format (`wire_api = "responses"`). Codex CLI requests are
+  translated into canonical Chat Completions, routed through the normal tier /
+  failover / circuit-breaker / key-rotation pipeline, and translated back into
+  Responses API SSE events (`response.created`, `output_text.delta`,
+  `output_item.done`, `response.completed`). `hexgate launch codex` prints a
+  ready-to-paste `~/.codex/config.toml` snippet.
+
+### Changed
+
+- `Gateway._canonicalize` accepts a `responses` protocol alongside `anthropic`
+  and `openai`; Responses request bodies are translated to chat before routing.
+- Non-streaming Responses responses are shaped from chat completions via
+  `chat_response_to_responses`; streaming Responses events are produced by
+  `openai_chunks_to_responses`.
+- CLI `AGENT_HINTS` now includes `codex`; `launch codex` starts the gateway and
+  prints the Codex config snippet.
+- Version bumped to 1.1.0.
+
 ## [1.0.0] - 2026-10-24
 
 Initial public release.

@@ -1,11 +1,12 @@
 # Client compatibility
 
-Hexgate exposes two wire protocols on one port:
+Hexgate exposes three wire protocols on one port:
 
 | Surface | Endpoint | Clients |
 | --- | --- | --- |
 | Anthropic Messages | `POST /v1/messages` (+ `count_tokens`) | Claude Code, Anthropic SDKs |
 | OpenAI Chat Completions | `POST /v1/chat/completions` | OpenCode, Aider, Cline, Continue, OpenAI SDKs |
+| OpenAI Responses API | `POST /v1/responses` | Codex CLI custom providers (`wire_api = "responses"`) |
 | Discovery | `GET /v1/models` | Clients that populate a model picker |
 
 Both surfaces share the same router, provider catalog, retry policy, circuit
@@ -41,12 +42,34 @@ providers (see [Field mapping](#field-mapping)).
 
 ### Codex CLI
 
-**Not supported.** Current Codex CLI only speaks the OpenAI **Responses API**
-for custom providers (`wire_api = "responses"`), and Hexgate does not proxy
-`/v1/responses`. The old `wire_api = "chat"` escape hatch has been removed
-upstream, so a Chat Completions gateway cannot serve Codex. Use Claude Code,
-OpenCode, Aider, Cline, Continue or a direct provider profile for Codex
-instead.
+Supported via the OpenAI Responses API at `POST /v1/responses`. Current Codex
+CLI only speaks `wire_api = "responses"` for custom providers, and Hexgate now
+proxies that wire format end to end — translating the Codex request shape into
+canonical Chat Completions, routing it through the normal failover pipeline, and
+translating the response back into Responses API SSE events.
+
+```bash
+hexgate launch codex
+```
+
+or configure `~/.codex/config.toml` yourself:
+
+```toml
+[model_providers.hexgate]
+name = "Hexgate"
+base_url = "http://127.0.0.1:8787/v1"
+wire_api = "responses"
+env_key = "HEXGATE_API_KEY"
+```
+
+```bash
+export HEXGATE_API_KEY="hexgate-local"
+codex --model gpt-5
+```
+
+Model labels such as `claude-sonnet-4-5` are routing hints that resolve to your
+tier chain; explicit `provider/model` routes go straight to a configured provider.
+Tool calls and function-call outputs are translated both ways.
 
 ### OpenCode
 
@@ -218,7 +241,7 @@ comment lines are not forwarded.
 
 | Endpoint | Status | Why |
 | --- | --- | --- |
-| `/v1/responses` (OpenAI Responses API) | **Not supported** | Stateful schema with reasoning items; this is why Codex CLI cannot use Hexgate |
+| `/v1/responses` (OpenAI Responses API) | **Supported** | Codex CLI custom providers use `wire_api = "responses"`; Hexgate translates this into Chat Completions for routing and back into Responses SSE events |
 | `/v1/embeddings` | Not supported | Not used by coding agents; would need per-provider dimensions |
 | `/v1/images/generations` | Not supported | Not a chat completion |
 | `/v1/audio/*` | Not supported | Not a chat completion |
@@ -230,9 +253,8 @@ comment lines are not forwarded.
 | `top_k` on OpenAI providers | Dropped | No equivalent field |
 | `n > 1` on Anthropic providers | First choice only | Anthropic returns one completion per request |
 
-These are deliberate limits, not partial implementations. If an agent requires
-the Responses API — Codex CLI is the common case — run it against the provider
-directly; Hexgate cannot bridge it without a Responses implementation.
+These are deliberate limits, not partial implementations. Codex CLI is bridged
+via the supported `/v1/responses` endpoint above.
 
 ## Authentication and headers
 

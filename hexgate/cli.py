@@ -25,6 +25,7 @@ from hexgate.secrets import SecretError, SecretStore, mask_key
 
 AGENT_HINTS = {
     "claude": "Claude Code — npm i -g @anthropic-ai/claude-code",
+    "codex": "OpenAI Codex CLI — https://github.com/openai/codex",
     "opencode": "OpenCode — npm i -g opencode-ai",
     "aider": "Aider — pip install aider-chat",
 }
@@ -268,6 +269,8 @@ def cmd_launch(args: argparse.Namespace) -> int:
         return 127
 
     print(f"launching {binary} through hexgate on port {port}")
+    if agent == "codex":
+        _print_codex_hint(settings)
     try:
         return subprocess.call([resolved, *extra], env=env)
     except FileNotFoundError:
@@ -427,6 +430,26 @@ def _agent_env(settings: Settings) -> dict[str, str]:
         "OPENAI_API_BASE": f"{base}/v1",
         "OPENAI_API_KEY": token,
     }
+
+
+def _print_codex_hint(settings: Settings) -> None:
+    host = settings.server.host
+    host = "127.0.0.1" if host in {"0.0.0.0", "::"} else host
+    base = f"http://{host}:{settings.server.port}"
+    token = settings.auth.proxy_token or "hexgate-local"
+    print()
+    print("Codex CLI speaks the Responses API, so point it at Hexgate's /v1/responses:")
+    print()
+    print("# Add to ~/.codex/config.toml")
+    print("[model_providers.hexgate]")
+    print('  name = "Hexgate"')
+    print(f'  base_url = "{base}/v1"')
+    print('  wire_api = "responses"')
+    print('  env_key = "HEXGATE_API_KEY"')
+    print()
+    print(f'# Then: export HEXGATE_API_KEY="{token}"')
+    print("# And select it: codex --model gpt-5  (or your routed model)")
+    print()
 
 
 def _health_url(settings: Settings) -> str:

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hexgate"
-version = "1.0.0"
+version = "1.1.0"
 description = "A resilient local model gateway for coding agents. One endpoint, every provider, zero wasted retries."
 readme = "README.md"
 license = { text = "MIT" }

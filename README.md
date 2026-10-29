@@ -69,8 +69,9 @@ Hexgate is inspired by [Free Claude Code](https://github.com/Alishahryar1/free-c
 | --- | --- | --- |
 | License | AGPL-3.0-only | **MIT** |
 | Provider catalog | 61 providers | 41 providers, JSON-driven and opt-in |
-| Agent support | 11 first-class launchers | 3 launchers + any OpenAI/Anthropic client |
+| Agent support | 11 first-class launchers | **4 launchers** + any OpenAI/Anthropic client |
 | Protocols | Anthropic entry point, per-provider adapters | **Both directions**, including streaming tool calls |
+| Codex CLI | Supported | **Supported via `/v1/responses`** |
 | Failover | Ordered fallback models | Tier + default chains, retry classification, **per-route circuit breakers** |
 | API keys | Numbered keys, choose one per model | **Automatic rotation** with per-key cooldowns |
 | Token savings | Optional RTK / Headroom | **Built-in shaping** with a per-rule report |
@@ -84,8 +85,8 @@ bots, voice notes, browser-hosted Codex sessions, or the very longest provider l
 real features and FCC does them well.
 
 **Choose Hexgate if** you want a small MIT-licensed service you can read end to end, precise
-control over how failures are handled, both wire protocols, encrypted keys, and metrics that
-plug into the monitoring you already run.
+control over how failures are handled, both wire protocols plus the OpenAI **Responses API** for
+Codex CLI, encrypted keys, and metrics that plug into the monitoring you already run.
 
 ## Install
 

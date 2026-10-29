@@ -43,6 +43,11 @@ async def count_tokens(request: Request) -> JSONResponse:
     return JSONResponse({"input_tokens": estimate_tokens(prompt_text(canonical))})
 
 
+@router.post("/v1/responses")
+async def openai_responses(request: Request):
+    return await _handle(request, "responses")
+
+
 @router.get("/v1/models")
 async def list_models(request: Request) -> JSONResponse:
     settings = request.app.state.settings

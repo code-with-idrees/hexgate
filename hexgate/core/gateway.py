@@ -33,6 +33,11 @@ from hexgate.protocol.anthropic import (
     prompt_text,
 )
 from hexgate.protocol.openai import estimate_tokens, iter_sse, sse
+from hexgate.protocol.responses import (
+    chat_response_to_responses,
+    openai_chunks_to_responses,
+    responses_request_to_chat,
+)
 from hexgate.protocol.streams import (
     anthropic_events_to_openai,
     openai_chunks_to_anthropic,
@@ -391,7 +396,12 @@ class Gateway:
             raise GatewayError(
                 400, "Request body must be a JSON object", type="invalid_request_error"
             )
-        canonical = anthropic_request_to_openai(body) if protocol == "anthropic" else dict(body)
+        if protocol == "anthropic":
+            canonical = anthropic_request_to_openai(body)
+        elif protocol == "responses":
+            canonical = responses_request_to_chat(body)
+        else:
+            canonical = dict(body)
         messages = canonical.get("messages")
         if not isinstance(messages, list) or not messages:
             raise GatewayError(
@@ -409,6 +419,8 @@ class Gateway:
         requested_model: str,
         canonical: dict[str, Any],
     ) -> dict[str, Any]:
+        if protocol == "responses":
+            return chat_response_to_responses(data, requested_model=requested_model)
         if protocol == "anthropic":
             if candidate.api == "anthropic":
                 payload = dict(data)
@@ -450,6 +462,25 @@ class Gateway:
                         stats=stats,
                     ):
                         yield frame
+            elif protocol == "responses":
+                if candidate.api == "anthropic":
+                    normalized = anthropic_events_to_openai(
+                        source,
+                        model=requested_model,
+                        prompt_tokens=prompt_tokens,
+                        stats=stats,
+                    )
+                else:
+                    normalized = rewrite_openai_stream(
+                        _dicts(source), model=requested_model, stats=stats
+                    )
+                async for frame in openai_chunks_to_responses(
+                    normalized,
+                    model=requested_model,
+                    prompt_tokens=prompt_tokens,
+                    stats=stats,
+                ):
+                    yield frame
             elif candidate.api == "anthropic":
                 async for frame in anthropic_events_to_openai(
                     source,
@@ -630,6 +661,12 @@ def _usage(payload: dict[str, Any], protocol: str) -> tuple[int, int, int]:
             int(usage.get("input_tokens") or 0),
             int(usage.get("output_tokens") or 0),
             int(usage.get("cache_read_input_tokens") or 0),
+        )
+    if protocol == "responses":
+        return (
+            int(usage.get("input_tokens") or 0),
+            int(usage.get("output_tokens") or 0),
+            0,
         )
     return (
         int(usage.get("prompt_tokens") or 0),
