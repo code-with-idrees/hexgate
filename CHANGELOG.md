@@ -4,7 +4,31 @@ All notable changes to Hexgate are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 1.1.0
+## [Unreleased] - 1.2.0
+
+### Added
+
+- **Twelve agent launchers.** `hexgate launch` now supports `claude`, `codex`,
+  `opencode`, `aider`, `cline`, `continue`, `pi`, `hermes`, `deepseek`,
+  `grok-build`, `muse-code` and `vscode-chat` (plus `custom --bin`). Each
+  prints install hints and injects the right base URL / API key env vars.
+- **Zero-config local models.** Free-tier providers (OpenRouter, Groq, NVIDIA
+  NIM, Google AI Studio, Cerebras, Mistral, SiliconFlow, Chutes, SambaNova,
+  Alibaba DashScope, GitHub Models, Cloudflare, Hugging Face, LLM7) and all
+  local providers (Ollama, LM Studio, llama.cpp, vLLM) ship enabled by default.
+  Install Ollama, run `hexgate serve`, and you have a coding-agent gateway with
+  no API key required.
+- **Demo scripts.** `scripts/demo_failover.sh` (Linux/macOS) and
+  `scripts/demo_failover.ps1` (Windows) walk through a provider failure and
+  show Hexgate failing over to the next route — no real API keys needed.
+
+### Changed
+
+- `hexgate launch` error output now shows all injected env vars and agent
+  install hints for every supported agent.
+- Provider catalog JSON: free and local entries default to `enabled: true`.
+
+## [1.1.0] - 2026-10-29
 
 ### Added
 

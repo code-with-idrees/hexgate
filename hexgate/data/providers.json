@@ -5,14 +5,22 @@
     "api": "openai",
     "base_url": "https://openrouter.ai/api/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://openrouter.ai/keys",
     "docs": "https://openrouter.ai/docs",
     "default_model": "openrouter/auto",
-    "models": ["openrouter/auto", "openrouter/free"],
+    "models": [
+      "openrouter/auto",
+      "openrouter/free"
+    ],
     "requires_key": true,
-    "env": ["OPENROUTER_API_KEY"],
-    "headers": { "HTTP-Referer": "https://github.com/code-with-idrees/hexgate", "X-Title": "Hexgate" },
+    "env": [
+      "OPENROUTER_API_KEY"
+    ],
+    "headers": {
+      "HTTP-Referer": "https://github.com/code-with-idrees/hexgate",
+      "X-Title": "Hexgate"
+    },
     "notes": "One key, hundreds of models, including a rotating set of free ones. Best starting point.",
     "color": "#8b9dff"
   },
@@ -22,13 +30,19 @@
     "api": "openai",
     "base_url": "https://integrate.api.nvidia.com/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://build.nvidia.com/settings/api-keys",
     "docs": "https://docs.nvidia.com/nim/",
     "default_model": "meta/llama-3.3-70b-instruct",
-    "models": ["meta/llama-3.3-70b-instruct", "nvidia/llama-3.1-nemotron-70b-instruct"],
+    "models": [
+      "meta/llama-3.3-70b-instruct",
+      "nvidia/llama-3.1-nemotron-70b-instruct"
+    ],
     "requires_key": true,
-    "env": ["NVIDIA_NIM_API_KEY", "NVIDIA_API_KEY"],
+    "env": [
+      "NVIDIA_NIM_API_KEY",
+      "NVIDIA_API_KEY"
+    ],
     "notes": "Generous free developer credits. Model IDs look like vendor/model.",
     "color": "#76b900"
   },
@@ -38,13 +52,19 @@
     "api": "openai",
     "base_url": "https://api.groq.com/openai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://console.groq.com/keys",
     "docs": "https://console.groq.com/docs",
     "default_model": "llama-3.3-70b-versatile",
-    "models": ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "qwen/qwen3-32b"],
+    "models": [
+      "llama-3.3-70b-versatile",
+      "llama-3.1-8b-instant",
+      "qwen/qwen3-32b"
+    ],
     "requires_key": true,
-    "env": ["GROQ_API_KEY"],
+    "env": [
+      "GROQ_API_KEY"
+    ],
     "notes": "Extremely fast inference. Great as the first hop for cheap tool-calling turns.",
     "color": "#f55036"
   },
@@ -54,13 +74,20 @@
     "api": "openai",
     "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://aistudio.google.com/apikey",
     "docs": "https://ai.google.dev/gemini-api/docs/openai",
     "default_model": "gemini-2.5-flash",
-    "models": ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.0-flash"],
+    "models": [
+      "gemini-2.5-flash",
+      "gemini-2.5-pro",
+      "gemini-2.0-flash"
+    ],
     "requires_key": true,
-    "env": ["GEMINI_API_KEY", "GOOGLE_API_KEY"],
+    "env": [
+      "GEMINI_API_KEY",
+      "GOOGLE_API_KEY"
+    ],
     "notes": "Free tier with long context. Uses Google's OpenAI-compatible surface.",
     "color": "#4285f4"
   },
@@ -70,13 +97,19 @@
     "api": "openai",
     "base_url": "https://api.cerebras.ai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://cloud.cerebras.ai/",
     "docs": "https://inference-docs.cerebras.ai/",
     "default_model": "llama-3.3-70b",
-    "models": ["llama-3.3-70b", "llama3.1-8b", "qwen-3-32b"],
+    "models": [
+      "llama-3.3-70b",
+      "llama3.1-8b",
+      "qwen-3-32b"
+    ],
     "requires_key": true,
-    "env": ["CEREBRAS_API_KEY"],
+    "env": [
+      "CEREBRAS_API_KEY"
+    ],
     "notes": "Wafer-scale inference, very high tokens/second. Free tier is rate limited.",
     "color": "#ff6f00"
   },
@@ -86,13 +119,19 @@
     "api": "openai",
     "base_url": "https://api.mistral.ai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://console.mistral.ai/",
     "docs": "https://docs.mistral.ai/",
     "default_model": "devstral-small-latest",
-    "models": ["devstral-small-latest", "codestral-latest", "mistral-small-latest"],
+    "models": [
+      "devstral-small-latest",
+      "codestral-latest",
+      "mistral-small-latest"
+    ],
     "requires_key": true,
-    "env": ["MISTRAL_API_KEY"],
+    "env": [
+      "MISTRAL_API_KEY"
+    ],
     "notes": "Devstral is tuned for agentic coding. A free experimentation tier exists.",
     "color": "#fa520f"
   },
@@ -106,9 +145,14 @@
     "signup": "https://platform.deepseek.com/api_keys",
     "docs": "https://api-docs.deepseek.com/",
     "default_model": "deepseek-chat",
-    "models": ["deepseek-chat", "deepseek-reasoner"],
+    "models": [
+      "deepseek-chat",
+      "deepseek-reasoner"
+    ],
     "requires_key": true,
-    "env": ["DEEPSEEK_API_KEY"],
+    "env": [
+      "DEEPSEEK_API_KEY"
+    ],
     "notes": "Very low cost per token with solid coding results.",
     "color": "#4d6bfe"
   },
@@ -122,9 +166,15 @@
     "signup": "https://platform.openai.com/api-keys",
     "docs": "https://platform.openai.com/docs",
     "default_model": "gpt-4o-mini",
-    "models": ["gpt-4o-mini", "gpt-4o", "gpt-4.1-mini"],
+    "models": [
+      "gpt-4o-mini",
+      "gpt-4o",
+      "gpt-4.1-mini"
+    ],
     "requires_key": true,
-    "env": ["OPENAI_API_KEY"],
+    "env": [
+      "OPENAI_API_KEY"
+    ],
     "notes": "Billed separately from a ChatGPT subscription. Use an API key here.",
     "color": "#10a37f"
   },
@@ -138,9 +188,15 @@
     "signup": "https://console.anthropic.com/settings/keys",
     "docs": "https://docs.anthropic.com/en/api",
     "default_model": "claude-sonnet-4-5",
-    "models": ["claude-sonnet-4-5", "claude-opus-4-1", "claude-haiku-4-5"],
+    "models": [
+      "claude-sonnet-4-5",
+      "claude-opus-4-1",
+      "claude-haiku-4-5"
+    ],
     "requires_key": true,
-    "env": ["ANTHROPIC_API_KEY"],
+    "env": [
+      "ANTHROPIC_API_KEY"
+    ],
     "notes": "Native Anthropic protocol. Useful as a last-resort fallback or for exact parity tests.",
     "color": "#d97757"
   },
@@ -154,9 +210,15 @@
     "signup": "https://console.x.ai/",
     "docs": "https://docs.x.ai/",
     "default_model": "grok-3-mini",
-    "models": ["grok-3-mini", "grok-3", "grok-code-fast-1"],
+    "models": [
+      "grok-3-mini",
+      "grok-3",
+      "grok-code-fast-1"
+    ],
     "requires_key": true,
-    "env": ["XAI_API_KEY"],
+    "env": [
+      "XAI_API_KEY"
+    ],
     "notes": "Grok Code Fast is priced for agent loops.",
     "color": "#9aa0a6"
   },
@@ -170,9 +232,14 @@
     "signup": "https://api.together.ai/settings/api-keys",
     "docs": "https://docs.together.ai/",
     "default_model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-    "models": ["meta-llama/Llama-3.3-70B-Instruct-Turbo", "Qwen/Qwen2.5-Coder-32B-Instruct"],
+    "models": [
+      "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "Qwen/Qwen2.5-Coder-32B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["TOGETHER_API_KEY"],
+    "env": [
+      "TOGETHER_API_KEY"
+    ],
     "notes": "Wide open-weight catalog with OpenAI-compatible tool calling.",
     "color": "#0f6fff"
   },
@@ -186,9 +253,14 @@
     "signup": "https://deepinfra.com/dash/api_keys",
     "docs": "https://deepinfra.com/docs/openai_api",
     "default_model": "meta-llama/Llama-3.3-70B-Instruct",
-    "models": ["meta-llama/Llama-3.3-70B-Instruct", "Qwen/Qwen2.5-Coder-32B-Instruct"],
+    "models": [
+      "meta-llama/Llama-3.3-70B-Instruct",
+      "Qwen/Qwen2.5-Coder-32B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["DEEPINFRA_API_KEY"],
+    "env": [
+      "DEEPINFRA_API_KEY"
+    ],
     "notes": "Cheap open-weight hosting with per-token billing.",
     "color": "#00b3a4"
   },
@@ -202,9 +274,13 @@
     "signup": "https://fireworks.ai/account/api-keys",
     "docs": "https://docs.fireworks.ai/",
     "default_model": "accounts/fireworks/models/llama-v3p3-70b-instruct",
-    "models": ["accounts/fireworks/models/llama-v3p3-70b-instruct"],
+    "models": [
+      "accounts/fireworks/models/llama-v3p3-70b-instruct"
+    ],
     "requires_key": true,
-    "env": ["FIREWORKS_API_KEY"],
+    "env": [
+      "FIREWORKS_API_KEY"
+    ],
     "notes": "Model IDs include the accounts/fireworks/models prefix.",
     "color": "#ff5c00"
   },
@@ -218,9 +294,14 @@
     "signup": "https://novita.ai/settings/key-management",
     "docs": "https://novita.ai/docs",
     "default_model": "meta-llama/llama-3.3-70b-instruct",
-    "models": ["meta-llama/llama-3.3-70b-instruct", "qwen/qwen-2.5-72b-instruct"],
+    "models": [
+      "meta-llama/llama-3.3-70b-instruct",
+      "qwen/qwen-2.5-72b-instruct"
+    ],
     "requires_key": true,
-    "env": ["NOVITA_API_KEY"],
+    "env": [
+      "NOVITA_API_KEY"
+    ],
     "notes": "Low-cost inference with a free credit on signup.",
     "color": "#00d4aa"
   },
@@ -234,9 +315,14 @@
     "signup": "https://studio.nebius.ai/",
     "docs": "https://docs.nebius.com/studio/inference",
     "default_model": "meta-llama/Llama-3.3-70B-Instruct",
-    "models": ["meta-llama/Llama-3.3-70B-Instruct", "Qwen/Qwen3-32B"],
+    "models": [
+      "meta-llama/Llama-3.3-70B-Instruct",
+      "Qwen/Qwen3-32B"
+    ],
     "requires_key": true,
-    "env": ["NEBIUS_API_KEY"],
+    "env": [
+      "NEBIUS_API_KEY"
+    ],
     "notes": "European-hosted open models; free tier available at times.",
     "color": "#4b7bec"
   },
@@ -246,13 +332,18 @@
     "api": "openai",
     "base_url": "https://api.siliconflow.com/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://cloud.siliconflow.com/account/ak",
     "docs": "https://docs.siliconflow.com/",
     "default_model": "Qwen/Qwen3-32B",
-    "models": ["Qwen/Qwen3-32B", "deepseek-ai/DeepSeek-V3"],
+    "models": [
+      "Qwen/Qwen3-32B",
+      "deepseek-ai/DeepSeek-V3"
+    ],
     "requires_key": true,
-    "env": ["SILICONFLOW_API_KEY"],
+    "env": [
+      "SILICONFLOW_API_KEY"
+    ],
     "notes": "Chinese-hosted open models with a free tier on selected IDs.",
     "color": "#7b61ff"
   },
@@ -262,13 +353,18 @@
     "api": "openai",
     "base_url": "https://llm.chutes.ai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://chutes.ai/app",
     "docs": "https://chutes.ai/docs",
     "default_model": "deepseek-ai/DeepSeek-V3",
-    "models": ["deepseek-ai/DeepSeek-V3", "Qwen/Qwen3-32B"],
+    "models": [
+      "deepseek-ai/DeepSeek-V3",
+      "Qwen/Qwen3-32B"
+    ],
     "requires_key": true,
-    "env": ["CHUTES_API_KEY"],
+    "env": [
+      "CHUTES_API_KEY"
+    ],
     "notes": "Decentralised GPU network with a free quota.",
     "color": "#ff3d71"
   },
@@ -282,9 +378,13 @@
     "signup": "https://featherless.ai/account/api-keys",
     "docs": "https://featherless.ai/docs",
     "default_model": "Qwen/Qwen2.5-Coder-32B-Instruct",
-    "models": ["Qwen/Qwen2.5-Coder-32B-Instruct"],
+    "models": [
+      "Qwen/Qwen2.5-Coder-32B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["FEATHERLESS_API_KEY"],
+    "env": [
+      "FEATHERLESS_API_KEY"
+    ],
     "notes": "Flat-rate access to a large open-weight catalog.",
     "color": "#f7b731"
   },
@@ -294,13 +394,18 @@
     "api": "openai",
     "base_url": "https://api.sambanova.ai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://cloud.sambanova.ai/apis",
     "docs": "https://docs.sambanova.ai/",
     "default_model": "Meta-Llama-3.3-70B-Instruct",
-    "models": ["Meta-Llama-3.3-70B-Instruct", "Meta-Llama-3.1-8B-Instruct"],
+    "models": [
+      "Meta-Llama-3.3-70B-Instruct",
+      "Meta-Llama-3.1-8B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["SAMBANOVA_API_KEY"],
+    "env": [
+      "SAMBANOVA_API_KEY"
+    ],
     "notes": "Fast inference with a free developer tier.",
     "color": "#ee5a24"
   },
@@ -314,9 +419,15 @@
     "signup": "https://platform.moonshot.ai/console/api-keys",
     "docs": "https://platform.moonshot.ai/docs",
     "default_model": "kimi-k2-0905-preview",
-    "models": ["kimi-k2-0905-preview", "moonshot-v1-128k"],
+    "models": [
+      "kimi-k2-0905-preview",
+      "moonshot-v1-128k"
+    ],
     "requires_key": true,
-    "env": ["MOONSHOT_API_KEY", "KIMI_API_KEY"],
+    "env": [
+      "MOONSHOT_API_KEY",
+      "KIMI_API_KEY"
+    ],
     "notes": "Kimi K2 is strong at long-horizon agent work.",
     "color": "#000000"
   },
@@ -330,9 +441,14 @@
     "signup": "https://platform.minimax.io/user-center/basic-information/interface-key",
     "docs": "https://platform.minimax.io/docs",
     "default_model": "MiniMax-M2",
-    "models": ["MiniMax-M2", "MiniMax-Text-01"],
+    "models": [
+      "MiniMax-M2",
+      "MiniMax-Text-01"
+    ],
     "requires_key": true,
-    "env": ["MINIMAX_API_KEY"],
+    "env": [
+      "MINIMAX_API_KEY"
+    ],
     "notes": "OpenAI-compatible endpoint. Check regional host if you signed up in CN.",
     "color": "#ff4d6d"
   },
@@ -346,9 +462,15 @@
     "signup": "https://z.ai/manage-apikey/apikey-list",
     "docs": "https://docs.z.ai/",
     "default_model": "glm-4.6",
-    "models": ["glm-4.6", "glm-4.5-air"],
+    "models": [
+      "glm-4.6",
+      "glm-4.5-air"
+    ],
     "requires_key": true,
-    "env": ["ZAI_API_KEY", "ZHIPU_API_KEY"],
+    "env": [
+      "ZAI_API_KEY",
+      "ZHIPU_API_KEY"
+    ],
     "notes": "The Coding Plan is personal-use only; use a pay-as-you-go key for shared machines.",
     "color": "#2f6bff"
   },
@@ -358,13 +480,20 @@
     "api": "openai",
     "base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://www.alibabacloud.com/help/en/model-studio/get-api-key",
     "docs": "https://www.alibabacloud.com/help/en/model-studio/compatibility-of-openai-with-dashscope",
     "default_model": "qwen3-coder-plus",
-    "models": ["qwen3-coder-plus", "qwen3-max", "qwen-plus"],
+    "models": [
+      "qwen3-coder-plus",
+      "qwen3-max",
+      "qwen-plus"
+    ],
     "requires_key": true,
-    "env": ["DASHSCOPE_API_KEY", "ALIBABA_CLOUD_API_KEY"],
+    "env": [
+      "DASHSCOPE_API_KEY",
+      "ALIBABA_CLOUD_API_KEY"
+    ],
     "notes": "International endpoint shown. Mainland accounts should switch to dashscope.aliyuncs.com.",
     "color": "#615ced"
   },
@@ -374,13 +503,19 @@
     "api": "openai",
     "base_url": "https://models.github.ai/inference",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://github.com/settings/tokens",
     "docs": "https://docs.github.com/en/github-models",
     "default_model": "openai/gpt-4o-mini",
-    "models": ["openai/gpt-4o-mini", "meta/Llama-3.3-70B-Instruct"],
+    "models": [
+      "openai/gpt-4o-mini",
+      "meta/Llama-3.3-70B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["GITHUB_MODELS_TOKEN", "GITHUB_TOKEN"],
+    "env": [
+      "GITHUB_MODELS_TOKEN",
+      "GITHUB_TOKEN"
+    ],
     "notes": "Free with a GitHub account and rate limits. Needs a PAT with models:read.",
     "color": "#6e5494"
   },
@@ -396,7 +531,9 @@
     "default_model": "",
     "models": [],
     "requires_key": true,
-    "env": ["AZURE_OPENAI_API_KEY"],
+    "env": [
+      "AZURE_OPENAI_API_KEY"
+    ],
     "notes": "Set Base URL to https://<resource>.openai.azure.com/openai/v1 and use your deployment name as the model.",
     "color": "#0078d4"
   },
@@ -406,13 +543,17 @@
     "api": "openai",
     "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://dash.cloudflare.com/profile/api-tokens",
     "docs": "https://developers.cloudflare.com/workers-ai/configuration/open-ai-compatibility/",
     "default_model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    "models": ["@cf/meta/llama-3.3-70b-instruct-fp8-fast"],
+    "models": [
+      "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+    ],
     "requires_key": true,
-    "env": ["CLOUDFLARE_API_TOKEN"],
+    "env": [
+      "CLOUDFLARE_API_TOKEN"
+    ],
     "notes": "Replace {account_id} in the Base URL with your Cloudflare account ID.",
     "color": "#f38020"
   },
@@ -426,9 +567,14 @@
     "signup": "https://dashboard.cohere.com/api-keys",
     "docs": "https://docs.cohere.com/docs/compatibility-api",
     "default_model": "command-r-plus-08-2024",
-    "models": ["command-r-plus-08-2024", "command-r7b-12-2024"],
+    "models": [
+      "command-r-plus-08-2024",
+      "command-r7b-12-2024"
+    ],
     "requires_key": true,
-    "env": ["COHERE_API_KEY"],
+    "env": [
+      "COHERE_API_KEY"
+    ],
     "notes": "Trial keys are rate limited but free.",
     "color": "#39594d"
   },
@@ -438,13 +584,18 @@
     "api": "openai",
     "base_url": "https://router.huggingface.co/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://huggingface.co/settings/tokens",
     "docs": "https://huggingface.co/docs/inference-providers",
     "default_model": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
-    "models": ["Qwen/Qwen3-Coder-480B-A35B-Instruct"],
+    "models": [
+      "Qwen/Qwen3-Coder-480B-A35B-Instruct"
+    ],
     "requires_key": true,
-    "env": ["HUGGINGFACE_API_KEY", "HF_TOKEN"],
+    "env": [
+      "HUGGINGFACE_API_KEY",
+      "HF_TOKEN"
+    ],
     "notes": "Routes to multiple inference partners under one token.",
     "color": "#ffd21e"
   },
@@ -458,9 +609,15 @@
     "signup": "https://vercel.com/dashboard/ai-gateway",
     "docs": "https://vercel.com/docs/ai-gateway",
     "default_model": "openai/gpt-4o-mini",
-    "models": ["openai/gpt-4o-mini", "anthropic/claude-sonnet-4"],
+    "models": [
+      "openai/gpt-4o-mini",
+      "anthropic/claude-sonnet-4"
+    ],
     "requires_key": true,
-    "env": ["AI_GATEWAY_API_KEY", "VERCEL_AI_GATEWAY_API_KEY"],
+    "env": [
+      "AI_GATEWAY_API_KEY",
+      "VERCEL_AI_GATEWAY_API_KEY"
+    ],
     "notes": "Unified billing across vendors; useful for cost tracking.",
     "color": "#000000"
   },
@@ -476,7 +633,9 @@
     "default_model": "",
     "models": [],
     "requires_key": true,
-    "env": ["OPENCODE_API_KEY"],
+    "env": [
+      "OPENCODE_API_KEY"
+    ],
     "notes": "Curated coding models behind one key; model IDs vary, use Fetch models.",
     "color": "#f97316"
   },
@@ -490,9 +649,13 @@
     "signup": "https://console.scaleway.com/iam/api-keys",
     "docs": "https://www.scaleway.com/en/docs/generative-apis/",
     "default_model": "llama-3.3-70b-instruct",
-    "models": ["llama-3.3-70b-instruct"],
+    "models": [
+      "llama-3.3-70b-instruct"
+    ],
     "requires_key": true,
-    "env": ["SCW_SECRET_KEY"],
+    "env": [
+      "SCW_SECRET_KEY"
+    ],
     "notes": "EU-hosted inference with data residency options.",
     "color": "#4f0599"
   },
@@ -508,7 +671,9 @@
     "default_model": "",
     "models": [],
     "requires_key": true,
-    "env": ["BASETEN_API_KEY"],
+    "env": [
+      "BASETEN_API_KEY"
+    ],
     "notes": "Model IDs are deployment-specific; discover them from the provider.",
     "color": "#19e37c"
   },
@@ -522,9 +687,13 @@
     "signup": "https://wandb.ai/settings",
     "docs": "https://docs.wandb.ai/guides/inference",
     "default_model": "openai/gpt-oss-20b",
-    "models": ["openai/gpt-oss-20b"],
+    "models": [
+      "openai/gpt-oss-20b"
+    ],
     "requires_key": true,
-    "env": ["WANDB_API_KEY"],
+    "env": [
+      "WANDB_API_KEY"
+    ],
     "notes": "Free during the preview period.",
     "color": "#ffcc33"
   },
@@ -540,7 +709,9 @@
     "default_model": "",
     "models": [],
     "requires_key": true,
-    "env": ["POOLSIDE_API_KEY"],
+    "env": [
+      "POOLSIDE_API_KEY"
+    ],
     "notes": "Laguna models are purpose-built for code agents.",
     "color": "#0ea5e9"
   },
@@ -550,13 +721,17 @@
     "api": "openai",
     "base_url": "https://api.llm7.io/v1",
     "tier": "free",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://dash.llm7.io/",
     "docs": "https://docs.llm7.io/",
     "default_model": "default",
-    "models": ["default"],
+    "models": [
+      "default"
+    ],
     "requires_key": false,
-    "env": ["LLM7_API_KEY"],
+    "env": [
+      "LLM7_API_KEY"
+    ],
     "notes": "Free community gateway; the key is optional but raises limits.",
     "color": "#22c55e"
   },
@@ -570,9 +745,14 @@
     "signup": "https://ollama.com/settings/keys",
     "docs": "https://docs.ollama.com/cloud",
     "default_model": "qwen3-coder:480b",
-    "models": ["qwen3-coder:480b", "kimi-k2:1t"],
+    "models": [
+      "qwen3-coder:480b",
+      "kimi-k2:1t"
+    ],
     "requires_key": true,
-    "env": ["OLLAMA_API_KEY"],
+    "env": [
+      "OLLAMA_API_KEY"
+    ],
     "notes": "Hosted versions of Ollama models; local Ollama is a separate provider.",
     "color": "#38bdf8"
   },
@@ -582,11 +762,14 @@
     "api": "openai",
     "base_url": "http://localhost:11434/v1",
     "tier": "local",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://ollama.com/download",
     "docs": "https://github.com/ollama/ollama/blob/main/docs/openai.md",
     "default_model": "llama3.1",
-    "models": ["llama3.1", "qwen2.5-coder"],
+    "models": [
+      "llama3.1",
+      "qwen2.5-coder"
+    ],
     "requires_key": false,
     "env": [],
     "notes": "Runs on your machine. No key, no quota, no data leaving the box.",
@@ -598,7 +781,7 @@
     "api": "openai",
     "base_url": "http://localhost:1234/v1",
     "tier": "local",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://lmstudio.ai/",
     "docs": "https://lmstudio.ai/docs/app/api/endpoints/openai",
     "default_model": "",
@@ -614,7 +797,7 @@
     "api": "openai",
     "base_url": "http://localhost:8080/v1",
     "tier": "local",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://github.com/ggml-org/llama.cpp",
     "docs": "https://github.com/ggml-org/llama.cpp/tree/master/tools/server",
     "default_model": "",
@@ -630,7 +813,7 @@
     "api": "openai",
     "base_url": "http://localhost:8000/v1",
     "tier": "local",
-    "enabled": false,
+    "enabled": true,
     "signup": "https://docs.vllm.ai/",
     "docs": "https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html",
     "default_model": "",

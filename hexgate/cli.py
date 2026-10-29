@@ -28,6 +28,14 @@ AGENT_HINTS = {
     "codex": "OpenAI Codex CLI — https://github.com/openai/codex",
     "opencode": "OpenCode — npm i -g opencode-ai",
     "aider": "Aider — pip install aider-chat",
+    "cline": "Cline — VS Code extension (cline) or pip install cline",
+    "continue": "Continue — VS Code / JetBrains extension (continue)",
+    "pi": "Pi — https://github.com/earendil-works/pi",
+    "hermes": "Hermes Agent — https://github.com/NousResearch/hermes-agent",
+    "deepseek": "DeepSeek Harness — https://github.com/deepseek-ai/deepseek-harness",
+    "grok-build": "Grok Build — https://github.com/xai-org/grok-build",
+    "muse-code": "Muse Code — https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2/",
+    "vscode-chat": "VS Code Chat — code.visualstudio.com (GitHub Copilot)",
 }
 
 
@@ -263,9 +271,14 @@ def cmd_launch(args: argparse.Namespace) -> int:
         print(
             f"install: {AGENT_HINTS.get(agent, 'install the agent, then rerun')}", file=sys.stderr
         )
-        print("environment ready:", file=sys.stderr)
-        for key in ("ANTHROPIC_BASE_URL", "OPENAI_BASE_URL"):
+        print("hexgate environment injected:", file=sys.stderr)
+        for key in ("ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY", "OPENAI_BASE_URL", "OPENAI_API_KEY"):
             print(f"  {key}={env[key]}", file=sys.stderr)
+        if agent == "codex":
+            print()
+            print(
+                "Codex also needs wire_api = 'responses' — run `hexgate launch codex` for the config."
+            )
         return 127
 
     print(f"launching {binary} through hexgate on port {port}")

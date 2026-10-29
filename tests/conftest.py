@@ -24,6 +24,11 @@ def settings(tmp_path, monkeypatch) -> Settings:
     cfg.server.port = 8799
     cfg.server.host = "127.0.0.1"
     cfg.telemetry.retain = 50
+    # Tests start from a clean slate: no provider is enabled until a test
+    # explicitly opts in. Production installs ship free/local providers
+    # enabled by default for a zero-config local path.
+    for provider in cfg.providers.values():
+        provider.enabled = False
     return cfg
 
 

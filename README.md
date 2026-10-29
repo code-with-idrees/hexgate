@@ -15,8 +15,8 @@
 **One local endpoint. Every model. Zero wasted retries.**
 
 Hexgate is a local gateway that sits between your coding agent and every model provider you
-have access to. Point Claude Code, OpenCode, Aider or any OpenAI/Anthropic-compatible client
-at `http://127.0.0.1:8787` and it will route each turn to the best provider you have
+have access to. Point Claude Code, OpenCode, Aider, Codex or any OpenAI/Anthropic-compatible
+client at `http://127.0.0.1:8787` and it will route each turn to the best provider you have
 configured — translating protocols, rotating keys, failing over, and keeping the agent in the
 loop while providers misbehave.
 
@@ -27,8 +27,13 @@ build step, and a catalog of **41 providers** that is data, not code.
 Claude Code ─┐                          ┌─> Groq
 OpenCode ────┤   Anthropic / OpenAI     │   OpenRouter
 Aider ───────┼──> 127.0.0.1:8787 ──────┼─> NVIDIA NIM
-your client ─┘   route · retry · shape  └─> your local vLLM
+Codex ───────┤   route · retry · shape  └─> your local Ollama
+your client ─┘   (incl. /v1/responses)   └─> your local vLLM
 ```
+
+**Zero-config local path:** Ollama, LM Studio, llama.cpp and vLLM ship enabled by default and
+need no API key. Install Ollama, run `hexgate serve`, and you have a local coding-agent gateway
+in under a minute.
 
 ---
 
@@ -69,9 +74,10 @@ Hexgate is inspired by [Free Claude Code](https://github.com/Alishahryar1/free-c
 | --- | --- | --- |
 | License | AGPL-3.0-only | **MIT** |
 | Provider catalog | 61 providers | 41 providers, JSON-driven and opt-in |
-| Agent support | 11 first-class launchers | **4 launchers** + any OpenAI/Anthropic client |
+| Agent support | 11 first-class launchers | **12 launchers** + any OpenAI/Anthropic client |
 | Protocols | Anthropic entry point, per-provider adapters | **Both directions**, including streaming tool calls |
 | Codex CLI | Supported | **Supported via `/v1/responses`** |
+| Zero-config local | No | **Yes — Ollama / LM Studio / llama.cpp / vLLM enabled by default** |
 | Failover | Ordered fallback models | Tier + default chains, retry classification, **per-route circuit breakers** |
 | API keys | Numbered keys, choose one per model | **Automatic rotation** with per-key cooldowns |
 | Token savings | Optional RTK / Headroom | **Built-in shaping** with a per-rule report |
@@ -149,21 +155,37 @@ the gateway:
 # Claude Code
 hexgate launch claude
 
+# OpenAI Codex CLI (uses /v1/responses under the hood)
+hexgate launch codex
+
 # OpenCode
 hexgate launch opencode
 
 # Aider (base URL is injected for you)
 hexgate launch aider
+
+# Cline, Continue, Pi, Hermes, DeepSeek, Grok Build, Muse Code, VS Code Chat
+hexgate launch cline        # VS Code extension, or any custom binary
+hexgate launch continue
+hexgate launch pi
+hexgate launch hermes
+hexgate launch deepseek
+hexgate launch grok-build
+hexgate launch muse-code
+hexgate launch vscode-chat
+
+# Or any custom agent binary
+hexgate launch custom --bin /path/to/your-agent --model sonnet
 ```
 
 Anything that accepts a custom base URL works too:
 
 ```bash
-# Anthropic-compatible clients
+# Anthropic-compatible clients (Claude Code, Anthropic SDKs)
 export ANTHROPIC_BASE_URL=http://127.0.0.1:8787
 export ANTHROPIC_API_KEY=hexgate-local
 
-# OpenAI-compatible clients
+# OpenAI-compatible clients (OpenCode, Aider, Cline, Continue, OpenAI SDKs)
 export OPENAI_BASE_URL=http://127.0.0.1:8787/v1
 export OPENAI_API_KEY=hexgate-local
 ```
@@ -171,10 +193,25 @@ export OPENAI_API_KEY=hexgate-local
 `hexgate env --shell powershell` prints the same values for Windows. If you set a proxy token,
 use it as the API key value; the launchers read it from `config.toml` automatically.
 
-> **Codex CLI is not supported.** Current Codex requires the OpenAI Responses API for custom
-> providers and no longer accepts `wire_api = "chat"`. Hexgate proxies Chat Completions and
-> Anthropic Messages only. See [client compatibility](docs/compatibility.md#codex-cli) for
-> details and alternatives.
+## Demo: watch failover keep your agent alive
+
+This is the moment Hexgate earns its keep. Open the dashboard at
+`http://127.0.0.1:8787` and watch the **Activity** tab while you do this:
+
+1. Configure two providers (e.g. Groq + OpenRouter) and add keys for both.
+2. Ask your agent a question. Hexgate routes to the first healthy provider.
+3. While the agent is thinking, revoke the first provider's key (or kill its process
+   if you're using a local server).
+4. The next turn automatically lands on the second provider — the agent never sees an
+   error, and the Activity tab shows the circuit breaker open on the dead route.
+
+That's "zero wasted retries": dead providers are skipped, bad keys are cooled, and the
+turn completes on the next live route. The dashboard shows every attempt, route, latency
+and error in real time.
+
+There's a scriptable version in `scripts/demo_failover.sh` (Linux/macOS) and
+`scripts/demo_failover.ps1` (Windows) that runs the whole sequence against MockTransport
+so you can see it without real API keys.
 
 ## Routing
 
@@ -287,7 +324,8 @@ you can see which provider actually answered a turn.
 | `hexgate launch <agent> [args…]` | Start an agent pointed at Hexgate |
 | `hexgate version` | Version |
 
-`launch` accepts `claude`, `opencode`, `aider`, or `custom --bin <path>`.
+`launch` accepts `claude`, `codex`, `opencode`, `aider`, `cline`, `continue`, `pi`, `hermes`,
+`deepseek`, `grok-build`, `muse-code`, `vscode-chat`, or `custom --bin <path>`.
 
 ## Providers
 
@@ -441,6 +479,21 @@ More detail: **[docs/architecture.md](docs/architecture.md)**. Adding a provider
 - [Contributing](CONTRIBUTING.md)
 - [Code of conduct](CODE_OF_CONDUCT.md)
 - [Security policy](SECURITY.md)
+
+## Help it spread
+
+Hexgate is new. If you find it useful, the single biggest thing you can do is **show it working**:
+
+1. **Record a 60-second demo.** Provider dies mid-turn → Hexgate fails over → your agent keeps
+   coding. Post it on X, HN, r/LocalLLaMA, r/ClaudeAI, r/OpenAI. That visual is what gets shared.
+2. **Install from PyPI.** Once published: `pipx install hexgate`. One command, no Git URL.
+3. **Star the repo.** Zero stars looks abandoned. Twenty real users make it look alive.
+4. **Open issues.** Bug reports, missing providers, missing agents — every issue is a roadmap
+   item someone else cares about too.
+
+FCC won with free tokens and OAuth. Hexgate's wedge is different: **a small, MIT-licensed,
+readable gateway with circuit breakers, encrypted keys, both wire protocols, Codex support, and
+zero-config local models.** Compete on reliability, not on free tokens.
 
 ## License
 
